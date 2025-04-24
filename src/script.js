@@ -12,6 +12,10 @@ const transactionList = document.getElementById("transactionList");
 const balance = document.getElementById("balance");
 
 function addTransaction() {
+    if (!desc || isNaN(amount)) {
+        alert("Fyll i både beskrivning och ett giltigt belopp.");
+        return;
+    }
     const desc = descInput.value.trim();
     const amount = parseFloat(amountInput.value);
     const type = this.id === "incomeBtn" ? "income" : "expense";
@@ -34,7 +38,7 @@ function updateBalance() {
     const totalIncome = incomeArray.reduce((sum, transaction) => sum + transaction.amount, 0);
     const totalExpense = expenseArray.reduce((sum, transaction) => sum + transaction.amount, 0);
     const balanceAmount = totalIncome - totalExpense;
-    balance.innerHTML = `Balance: ${balanceAmount}`;
+    balance.innerHTML = `balance: ${balanceAmount}`;
 }
 
 incomeBtn.addEventListener("click", addTransaction);
